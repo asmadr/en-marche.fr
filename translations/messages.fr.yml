@@ -290,7 +290,9 @@ referent.filter.interests: Choisissez des centres d'intérêt
 referent.managed_area: Zone gérée
 referent.checkbox.co_referent: Donner un accès à l'onglet&nbsp;<i>Adhérents</i>
 referent.checkbox.jecoute_manager: Donner un accès à l'espace&nbsp;<i>J'écoute</i>
+referent.checkbox.municipal_manager_supervisor: Donner un accès à l'onglet&nbsp;<i>Responsables Communaux</i>
 referent.coreferent_access: Accès adhérents
+referent.municipal_managers_access: Accès responsables communaux
 referent.email.unchangeable: Pour pouvoir modifier l'e-mail, veuillez décocher la case donnant les droits d'accès à la rubrique <i>Adhérents</i> et sauvegarder la modification.
 referent.save: Enregistrer
 

@@ -259,6 +259,14 @@ class Adherent implements UserInterface, UserEntityInterface, GeoPointInterface,
     private $municipalManagerRole;
 
     /**
+     * @var MunicipalManagerSupervisorRole|null
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\MunicipalManagerSupervisorRole", cascade={"all"}, orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $municipalManagerSupervisorRole;
+
+    /**
      * @var BoardMember|null
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\BoardMember\BoardMember", mappedBy="adherent", cascade={"all"}, orphanRemoval=true)
@@ -716,6 +724,7 @@ class Adherent implements UserInterface, UserEntityInterface, GeoPointInterface,
             || $this->isSenator()
             || $this->isMunicipalChief()
             || $this->isMunicipalManager()
+            || $this->isMunicipalManagerSupervisor()
         ;
     }
 
@@ -1164,6 +1173,27 @@ class Adherent implements UserInterface, UserEntityInterface, GeoPointInterface,
     public function setMunicipalManagerRole(?MunicipalManagerRoleAssociation $municipalManagerRole): void
     {
         $this->municipalManagerRole = $municipalManagerRole;
+    }
+
+    public function getMunicipalManagerSupervisorRole(): ?MunicipalManagerSupervisorRole
+    {
+        return $this->municipalManagerSupervisorRole;
+    }
+
+    public function setMunicipalManagerSupervisorRole(
+        ?MunicipalManagerSupervisorRole $municipalManagerSupervisorRole
+    ): void {
+        $this->municipalManagerSupervisorRole = $municipalManagerSupervisorRole;
+    }
+
+    public function revokeMunicipalManagerSupervisorRole(): void
+    {
+        $this->municipalManagerSupervisorRole = null;
+    }
+
+    public function isMunicipalManagerSupervisor(): bool
+    {
+        return $this->municipalManagerSupervisorRole instanceof MunicipalManagerSupervisorRole;
     }
 
     public function getBoardMember(): ?BoardMember

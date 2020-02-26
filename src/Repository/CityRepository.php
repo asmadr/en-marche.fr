@@ -30,8 +30,15 @@ class CityRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder(self::ALIAS);
 
-        if ($tags = $filter->getTags()) {
-            $this->applyGeoFilter($qb, $tags, self::ALIAS, 'country', 'inseeCode');
+        if ($managedTags = $filter->getManagedTags()) {
+            $this->applyGeoFilter($qb, $managedTags, self::ALIAS, 'country', 'inseeCode');
+        }
+
+        if ($managedInseeCode = $filter->getManagedInseeCode()) {
+            $qb
+                ->andWhere(self::ALIAS.'.inseeCode = :managed_insee_code')
+                ->setParameter('managed_insee_code', $managedInseeCode)
+            ;
         }
 
         if ($name = $filter->getName()) {
