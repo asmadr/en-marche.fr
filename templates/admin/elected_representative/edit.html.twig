@@ -1,0 +1,24 @@
+{% extends '@SonataAdmin/CRUD/base_edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            const isElected = $("div.icheckbox_square-blue input[id$='_isElected']");
+            const toggleFinishAt = function() {
+                if (isElected.is(':checked')) {
+                    $("div.date input[id$='_finishAt']").show();
+                } else {
+                    $("div.date input[id$='_finishAt']").hide();
+                }
+            };
+
+            isElected.change(function() {
+                toggleFinishAt();
+            });
+
+            toggleFinishAt();
+        });
+    </script>
+{% endblock %}

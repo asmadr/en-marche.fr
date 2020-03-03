@@ -157,6 +157,19 @@ class ElectedRepresentative
      */
     private $socialNetworkLinks;
 
+    /**
+     * Mandate[]|Collection
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="AppBundle\Entity\ElectedRepresentative\Mandate",
+     *     mappedBy="electedRepresentative",
+     *     cascade={"all"},
+     *     orphanRemoval=true,
+     *     fetch="EAGER"
+     * )
+     */
+    private $mandates;
+
     public function __construct(
         string $firstName,
         string $lastName,
@@ -170,6 +183,7 @@ class ElectedRepresentative
         $this->birthDate = $birthDate;
         $this->officialId = $officialId;
         $this->socialNetworkLinks = new ArrayCollection();
+        $this->mandates = new ArrayCollection();
     }
 
     public function getId(): int
@@ -328,6 +342,24 @@ class ElectedRepresentative
     public function removeSocialNetworkLink(SocialNetworkLink $link): void
     {
         $this->socialNetworkLinks->removeElement($link);
+    }
+
+    public function getMandates(): Collection
+    {
+        return $this->mandates;
+    }
+
+    public function addMandate(Mandate $mandate): void
+    {
+        if (!$this->mandates->contains($mandate)) {
+            $mandate->setElectedRepresentative($this);
+            $this->mandates->add($mandate);
+        }
+    }
+
+    public function removeMandate(Mandate $mandate): void
+    {
+        $this->mandates->removeElement($mandate);
     }
 
     public function __toString(): string

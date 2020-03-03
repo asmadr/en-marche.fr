@@ -647,3 +647,20 @@ retirement_simulator.profession.security_force: membre des forces de l'ordre
 retirement_simulator.profession.private_sector: salarié du privé
 retirement_simulator.profession.independant: indépendant
 retirement_simulator.profession.other: autre
+
+#
+# ElectedRepresentative
+#
+elected_representative.mandate.type.city_council: Conseiller municipal
+elected_representative.mandate.type.epci_member: Membre d'EPCI
+elected_representative.mandate.type.departmental_council: Conseiller départemental
+elected_representative.mandate.type.regional_council: Conseiller régional
+elected_representative.mandate.type.corsica_assembly_member: Membre de l'Assemblée de Corse
+elected_representative.mandate.type.deputy: Député
+elected_representative.mandate.type.senator: Sénateur
+elected_representative.mandate.type.euro_deputy: Député européen
+elected_representative.mandate.larem_support.invested: Investi
+elected_representative.mandate.larem_support.official: Soutien officiel
+elected_representative.mandate.larem_support.informal: Soutien informel
+elected_representative.mandate.larem_support.not_supported: Pas soutenu
+elected_representative.mandate.invalid_date_range: La date de fin du mandat doit être postérieure à la date de début.

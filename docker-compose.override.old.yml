@@ -1,0 +1,88 @@
+version: "3.2"
+
+networks:
+    proxy:
+        external:
+            name: proxy
+
+services:
+    app:
+        volumes:
+            - "~/.composer:/root/.composer"
+        environment:
+            - VIRTUAL_HOST=enmarche.code,legislatives.enmarche.code,m.enmarche.code
+        ports:
+          - 8080:80
+        networks:
+            proxy:
+                aliases:
+                    - enmarche.code
+#        environment:
+#            - BLACKFIRE_CLIENT_ID
+#            - BLACKFIRE_CLIENT_TOKEN
+
+#    app_est:
+            ##        build: docker/dev
+            ##        volumes:
+            ##            - .:/app
+            ##            - "~/.composer:/root/.composer"
+            ##        environment:
+            ##            - VIRTUAL_HOST=enmarche.code,legislatives.enmarche.code,m.enmarche.code
+            ##        networks:
+            ##            default:
+            ##                aliases:
+            ##                    - test.enmarche.code
+            ##                    - enmarche.code
+            ##        depends_on:
+            ##            - db
+            ##            - redis
+            ##            - rabbitmq
+            ##        ports:
+            ##            - 8081:80test:
+#        build: docker/dev
+#        volumes:
+#            - .:/app
+#            - "~/.composer:/root/.composer"
+#        environment:
+#            - VIRTUAL_HOST=enmarche.code,legislatives.enmarche.code,m.enmarche.code
+#        networks:
+#            default:
+#                aliases:
+#                    - test.enmarche.code
+#                    - enmarche.code
+#        depends_on:
+#            - db
+#            - redis
+#            - rabbitmq
+#        ports:
+#            - 8081:80
+
+    rabbitmq:
+        ports:
+            - "15672:15672"
+
+    db:
+        ports:
+            - "3306:3306"
+
+
+
+    pma:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_USER: root
+            PMA_PASSWORD: root
+            VIRTUAL_HOST: phpmyadmin.enmarche.code
+        networks:
+            - default
+            - proxy
+
+#    blackfire:
+#        image: blackfire/blackfire
+#        environment:
+#            BLACKFIRE_LOG_LEVEL: 4
+#            BLACKFIRE_SERVER_ID:
+#            BLACKFIRE_SERVER_TOKEN:
